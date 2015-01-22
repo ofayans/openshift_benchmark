@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>OpenshiftBm</title>
+  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+  <%= csrf_meta_tags %>
+  <script>
+     DEBUG = true;
+  </script>
+</head>
+<body>
+<div class="navbar navbar-inverse navbar-fixed-top">
+  <div class="navbar-inner">
+    <div class="container">
+      <ul class="nav navbar-nav">
+        <% if user_signed_in? %>
+          <li class="navbaritem">
+            <a href="/dockerservers/new">New dockerserver</a>
+           </li>
+          <li class="navbaritem">
+            <a href="/dockerservers">Available dockerservers</a>
+          </li>
+          <li class="navbaritem">
+            <a href="/gear_profiles/new">New gear profile</a>
+           </li>
+          <li class="navbaritem">
+            <a href="/gear_profiles">Available gear_profiles</a>
+          </li>
+          <li class="navbaritem">
+            <a href="/app_types/new">New app_type</a>
+           </li>
+          <li class="navbaritem">
+            <a href="/app_types">Available app_types</a>
+          </li>
+
+          <li class="navbaritem">
+            <a href="/runs/new">New run</a>
+          </li>
+          <li class="navbaritem">
+            <a href="/runs">Available runs</a>
+          </li>
+          <li>
+            <%= link_to "Logout", destroy_user_session_path, method: :delete, :class => 'navbaritem' %>
+          </li>
+        <% else %>
+          <li>
+            <%= link_to "Login", new_user_session_path, :class => 'navbaritem'  %>
+          </li>
+
+        <% end %>
+
+      </ul>
+    </div><!-- end container -->
+  </div><!-- end navbar inner -->
+</div><!-- end nav -->
+
+<div class="container">
+<%= yield %>
+</div><!-- end container -->
+</body>
+</html>

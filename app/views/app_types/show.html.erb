@@ -1,0 +1,13 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+<strong>Name:</strong>
+<strong>Product:</strong>
+
+  <%= @app_type.name %>
+  <%= Product.find_by(:id=>@app_type.product_id).name %>
+
+</p>
+
+<%= link_to 'Edit', edit_app_type_path(@app_type) %> |
+<%= link_to 'Back', app_types_path %>

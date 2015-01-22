@@ -1,0 +1,14 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @dockerserver.name %>
+</p>
+
+<p>
+  <strong>Url:</strong>
+  <%= @dockerserver.url %>
+</p>
+
+<%= link_to 'Edit', edit_dockerserver_path(@dockerserver) %> |
+<%= link_to 'Back', dockerservers_path %>

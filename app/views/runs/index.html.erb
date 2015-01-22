@@ -1,0 +1,39 @@
+<h1>Listing runs</h1>
+
+<table class="report">
+  <thead>
+    <tr>
+      <th>Product</th>
+      <th>Gear profile</th>
+      <th>Requests per thread</th>
+      <th>Thread count</th>
+      <th>Run status</th>
+      <th colspan="5"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @runs.each do |run| %>
+      <tr>
+        <td><%= Product.find_by(:id => run.product_id).name %></td>
+        <td><%= GearProfile.find_by(:id => run.gear_profile_id).name %></td>
+        <td><%= run.requestcount %></td>
+        <td><%= run.concurrency %></td>
+        <% if run.status_id == 1%>
+          <td><span style="color:cyan;"><%= Status.find_by(:id => run.status_id).name %></span></td>
+        <% elsif run.status_id == 2 %>
+          <td><span style="color:green;"><%= Status.find_by(:id => run.status_id).name %></span></td>
+        <% else %>
+          <td><span style="color:red;"><%= Status.find_by(:id => run.status_id).name %></span></td>
+        <% end%>
+        <td><%= link_to 'Results', report_viewer_path(run.id) %></td>
+        <td><%= link_to 'Show', run %></td>
+        <td><%= link_to 'Destroy', run, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Run', new_run_path %>

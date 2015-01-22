@@ -1,0 +1,3 @@
+Before you build an image here, please make sure to put a .ssh folder with the
+key containers would use to upload results to the server and to access
+openshift apps. Make sure to test the keys with your rails server.

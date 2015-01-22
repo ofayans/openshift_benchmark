@@ -1,0 +1,32 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Product:</strong>
+  <%= Product.find_by(:id => @run.product_id).name %>
+</p>
+
+<p>
+  <strong>Broker:</strong>
+  <%= @run.broker %>
+</p>
+
+<p>
+  <strong>Gear profile</strong>
+  <%= GearProfile.find_by(:id => @run.gear_profile_id).name %>
+  </p>
+
+<p>
+  <strong>Request count per thread:</strong>
+  <%= @run.requestcount %>
+</p>
+
+
+<p>
+  <strong>Concurrency:</strong>
+  <%= @run.concurrency %>
+</p>
+
+
+<%= link_to 'Results', report_viewer_path %>
+<%= link_to 'Edit', edit_run_path(@run) %> |
+<%= link_to 'Back', runs_path %>

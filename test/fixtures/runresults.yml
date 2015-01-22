@@ -1,0 +1,29 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  run_id: 
+  app_creation_mean: MyString
+  app_creation_stdev: MyString
+  app_creation_values: MyString
+  time_perrequests_before: MyString
+  time_perrequests_before_stdev: MyString
+  requests_persecond_before: MyString
+  requests_persecond_before_stdev: MyString
+  time_perrequests_after: MyString
+  time_perrequests_after_stdev: MyString
+  requests_persecond_after: MyString
+  requests_persecond_after_stdev: MyString
+
+two:
+  run_id: 
+  app_creation_mean: MyString
+  app_creation_stdev: MyString
+  app_creation_values: MyString
+  time_perrequests_before: MyString
+  time_perrequests_before_stdev: MyString
+  requests_persecond_before: MyString
+  requests_persecond_before_stdev: MyString
+  time_perrequests_after: MyString
+  time_perrequests_after_stdev: MyString
+  requests_persecond_after: MyString
+  requests_persecond_after_stdev: MyString

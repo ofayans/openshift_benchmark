@@ -1,0 +1,16 @@
+<h1>Reports from run <%= @run.id %> against <%= Product.find_by(:id => @run.product_id).name %> </h1>
+<% if @run.status_id == 2%>
+  <br />
+  <%= link_to "Summary Report:", summary_report_viewer_path %>
+  <br />
+  <br>
+    <%= link_to "Download results archive", {:controller => "support", :action => "download_results", :id => @run.id }, :target => '_blank' %>
+  </br>
+  <br />
+<% elsif @run.status_id == 3%>
+  <p class="failed">The test has failed.</p>
+  <p>You could <%= link_to "download results archive", {:controller => "support", :action => "download_results", :id => @run.id }, :target => '_blank' %> to try to find out what went wrong</p>
+<% else %>
+  <p>The test is still running</p>
+<% end %>
+

@@ -1,0 +1,25 @@
+<h1>Listing gear_profiles</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @gear_profiles.each do |gear_profile| %>
+      <tr>
+        <td><%= gear_profile.name %></td>
+        <td><%= link_to 'Show', gear_profile %></td>
+        <td><%= link_to 'Edit', edit_gear_profile_path(gear_profile) %></td>
+        <td><%= link_to 'Destroy', gear_profile, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Gear profile', new_gear_profile_path %>

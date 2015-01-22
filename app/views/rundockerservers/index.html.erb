@@ -1,0 +1,31 @@
+<h1>Listing rundockerservers</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Run</th>
+      <th>Dockerserver</th>
+      <th>Image</th>
+      <th>Jobcount</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @rundockerservers.each do |rundockerserver| %>
+      <tr>
+        <td><%= rundockerserver.run %></td>
+        <td><%= rundockerserver.dockerserver %></td>
+        <td><%= rundockerserver.image %></td>
+        <td><%= rundockerserver.jobcount %></td>
+        <td><%= link_to 'Show', rundockerserver %></td>
+        <td><%= link_to 'Edit', edit_rundockerserver_path(rundockerserver) %></td>
+        <td><%= link_to 'Destroy', rundockerserver, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Rundockerserver', new_rundockerserver_path %>

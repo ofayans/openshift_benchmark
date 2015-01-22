@@ -1,0 +1,100 @@
+<%= form_for(@run) do |f| %>
+  <% if @run.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@run.errors.count, "error") %> prohibited this run from being saved:</h2>
+
+      <ul>
+      <% @run.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+  <!-- Let's declare some variables -->
+  <% product_desc = "Select the product to test against" %>
+  <% broker_desc = "IP or hostname of the openshift broker" %>
+  <% login_desc = "Login to use with the broker" %>
+  <% password_desc = "Password to use with the broker" %>
+  <% netrc_desc = "Paste the contents of your ~/.netrc file" %>
+  <% gearprofile_desc = "Gear profile to use" %>
+  <% apptype_desc = "Web cartridge to use" %>
+  <% addon_desc = "addon (database) cartridge" %>
+  <% fromcode_desc = "git url of the source code repository" %>
+  <% envvars_desc = "coma-separated list of evnironment variables and their values. For example: JENKINS_HOME=/some/custom/path" %>
+  <% scale_desc = "How many times to scale the app up 1 gear. The app will be benchmarked after each scaling" %>
+  <% requestcount_desc = "How many http requests to perform in each jmeter thread" %>
+  <% concurrency_desc = "How many jmeter threads to launch" %>
+  <% duration_desc = "Critical request duration in milliseconds. Requests that took longer to serve would considered failed" %>
+<!-- End of variable declaration -->
+  <div class="row">
+    <div class="field">
+      <%= f.label :product %><br>
+      <div class "blah" data-toggle="popover" data-content="<%= product_desc %>"><%= f.collection_select(:product_id, Product.all, :id, :name, {:include_blank => true}, {:onchange => "remove_unnecessary_fields(this, this.value)"}) %></div>
+    </div>
+    <div class="field openshift">
+      <%= f.label :broker %></div><br>
+      <div class "blah" data-toggle="popover" data-content="<%= broker_desc %>"><%= f.text_field :broker %></div>
+    </div>
+    <div class="field openshift">
+      <%= f.label :login %><br>
+      <div class "blah" data-toggle="popover" data-content="<%= login_desc %>"><%= f.text_field :login %></div>
+    </div>
+    <div class="field openshift">
+      <%= f.label :password %><br>
+      <div class "blah" data-toggle="popover" data-content="<%= password_desc %>"><%= f.password_field :password %></div>
+    </div>
+    <div class="field heroku">
+      <%= f.label :heroku_netrc_file %>
+      <div class "blah" data-toggle="popover" data-content="<%= netrc_desc %>"><%= f.file_field(:heroku_netrc) %></div>
+    </div>
+    <div class="field">
+      <%= f.label :gear_profile %><br>
+      <div class "blah" data-toggle="popover" data-content="<%= gearprofile_desc %>"><%= f.collection_select(:gear_profile_id, GearProfile.all, :id, :name, include_blank: false) %></div>
+    </div>
+    <div class="field">
+      <%= f.label :app_type %><br>
+      <div class "blah" data-toggle="popover" data-content="<%= apptype_desc %>"><%= f.collection_select(:app_type_id, AppType.all, :id, :name, include_blank: true) %></div>
+    </div>
+    <div class="field">
+      <%= f.label :addon %><br>
+      <div class "blah" data-toggle="popover" data-content="<%= addon_desc %>"><%= f.collection_select(:addon_id, Addon.all, :id, :name, include_blank: true) %></div>
+    </div>
+    <div class="field">
+      <%= f.label :from_code %><br>
+      <div class "blah" data-toggle="popover" data-content="<%= fromcode_desc %>"><%= f.text_field :from_code %></div>
+    </div>
+    <div class="field openshift">
+      <%= f.label :environmental_variables %><br>
+      <div class "blah" data-toggle="popover" data-content="<%= envvars_desc %>"><%= f.text_field :envvars %></div>
+    </div>
+
+    <div class="field">
+      <%= f.label :scale %><br>
+      <div class "blah" data-toggle="popover" data-content="<%= scale_desc %>"><%= f.number_field :scale %></div>
+    </div>
+
+    <div class="field">
+      <%= f.label :request_count_per_thread %><br>
+      <div class "blah" data-toggle="popover" data-content="<%= requestcount_desc %>"><%= f.number_field :requestcount %></div>
+    </div>
+    <div class="field">
+      <%= f.label :number_of_threads %><br>
+      <div class "blah" data-toggle="popover" data-content="<%= concurrency_desc %>"><%= f.number_field :concurrency %></div>
+    </div>
+    <div class="field">
+      <%= f.label :critical_request_duration %><br>
+      <div class "blah" data-toggle="popover" data-content="<%= duration_desc %>"><%= f.number_field :duration_threshold %></div>
+    </div>
+
+    <div class="serverlist">
+      <%= f.fields_for :rundockerservers do |builder| %>
+        <%= render "dockerserver_fields", :f => builder %>
+      <% end %>
+      <%= link_to_add_dockerserver "Add new docker server", f, :rundockerservers %>
+    </div>
+
+    <div class="actions">
+      <%= f.submit %>
+    </div>
+  </div>
+<% end %>

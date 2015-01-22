@@ -1,0 +1,49 @@
+<h1>Summary report for test run <%= @run.id %></h1>
+<br />
+<p>Number of requests per user: <%= @run.requestcount %><br />
+<p>Number of parallel users: <%= @run.concurrency %><br />
+<p>Critical request duration: <%= @run.duration_threshold %><br />
+<p>App scaled up <%= @run.scale %> times<br />
+<p>From code: <%= @run.from_code %>
+</p>
+<% if Product.find_by(:id => @run.product_id).name == "openshift" %>
+  <p>Broker: <%= @run.broker %></p>
+  <p>Gear profile: <%= GearProfile.find_by(:id => @run.gear_profile_id).name %><br />
+  <p>App type: <%= AppType.find_by(:id => @run.app_type_id).name %> <br />
+
+<% end %>
+<% if @addon %>
+  <p>Addon cartridge: <%= Addon.find_by(:id => @run.addon_id).name %><br />
+<% end %>
+<p>Number of observations: <%=@runresult.no_of_observations%></p>
+<table border="1" class="report">
+  <tr>
+    <th>Measure</th>
+    <th>Average value</th>
+    <th>Standard deviation</th>
+    <th>Percentage of slow requests</th>
+  </tr>
+  <tr>
+    <td>App creation time, in seconds</td> 
+    <td><%=@runresult.app_creation_mean%></td>
+    <td><%=@runresult.app_creation_stdev%></td>
+    <td></td>
+  </tr>
+   <tr>
+    <td>Request duration before scaling, milliseconds</td> 
+    <td><%=@runresult.request_duration_before_scaling%></td>
+    <td><%=@runresult.request_duration_before_scaling_stdev%></td>
+    <td><%=@runresult.slow_requests_before_scaling %>
+  </tr>
+  <% @run.scale.times do |iter| %>
+    <tr>
+      <td>Request duration after <%= iter + 1 %> scaling, milliseconds</td> 
+      <td><%= @thehash1[iter+1] %></td>
+      <td><%= @thehash2[iter+1] %></td>
+      <td><%= @thehash3[iter+1] %></td>
+    </tr>
+  <% end%>
+</table>
+<br />
+<%= link_to "Download raw results archive", {:controller => "support", :action => "download_results", :id => @run.id }, :target => '_blank' %>
+

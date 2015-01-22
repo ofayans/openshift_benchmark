@@ -1,0 +1,22 @@
+<!-- Let's declare some variables -->
+<% dockerserver_desc = "Select the pre-configured docker server" %>
+<% dockerimage_desc = "Select the image containing the benchmarking script and testplan" %>
+<% jobcount_desc = "Number of docker containers to launch. They will be launched sequentially" %>
+<!-- End of variable declaration -->
+<div class="dockerserver">
+  <div class="field">
+    <%= f.label "Docker server" %><br>
+    <div class "blah" data-toggle="popover" data-content="<%= dockerserver_desc %>"><%= f.collection_select(:dockerserver_id, Dockerserver.all, :id, :name, {:prompt => "Select"}, {:onchange => "query_dockerimages(this.value, this.id)"})%></div>
+    <%= f.hidden_field :_destroy %>
+    <%= link_to_remove_dockerserver "Delete", f %>
+  </div>
+  <div class="field">
+    <%= f.label "Docker image" %><br>
+    <div class "blah" data-toggle="popover" data-content="<%= dockerimage_desc %>"><%= f.collection_select(:image_id, [], :image_imageuuid, :tag) %></div>
+  </div>
+  <div class="field">
+    <%= f.label :jobcount %>
+    <div class "blah" data-toggle="popover" data-content="<%= jobcount_desc %>"><%= f.number_field :jobcount %></div>
+  </div>
+</div>
+

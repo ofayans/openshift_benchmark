@@ -1,0 +1,24 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Run:</strong>
+  <%= @rundockerserver.run %>
+</p>
+
+<p>
+  <strong>Dockerserver:</strong>
+  <%= @rundockerserver.dockerserver %>
+</p>
+
+<p>
+  <strong>Image:</strong>
+  <%= @rundockerserver.image %>
+</p>
+
+<p>
+  <strong>Jobcount:</strong>
+  <%= @rundockerserver.jobcount %>
+</p>
+
+<%= link_to 'Edit', edit_rundockerserver_path(@rundockerserver) %> |
+<%= link_to 'Back', rundockerservers_path %>

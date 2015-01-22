@@ -1,0 +1,33 @@
+<%= form_for(@rundockerserver) do |f| %>
+  <% if @rundockerserver.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@rundockerserver.errors.count, "error") %> prohibited this rundockerserver from being saved:</h2>
+
+      <ul>
+      <% @rundockerserver.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :run_id %><br>
+    <%= f.text_field :run_id %>
+  </div>
+  <div class="field">
+    <%= f.label :dockerserver_id %><br>
+    <%= f.text_field :dockerserver_id %>
+  </div>
+  <div class="field">
+    <%= f.label :image_id %><br>
+    <%= f.text_field :image_id %>
+  </div>
+  <div class="field">
+    <%= f.label :jobcount %><br>
+    <%= f.number_field :jobcount %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>
